@@ -181,6 +181,7 @@ public class RequestDAO implements RequestService {
 		
 	}
 	
+	//below only available to management---------------------------------------------------------------------
 	public void getAllAccounts(Context ctx) throws SQLException { //used by managers to view all account info
 		
 		String sql = "SELECT * FROM accounts"; 
