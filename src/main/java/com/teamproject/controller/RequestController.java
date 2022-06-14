@@ -62,7 +62,7 @@ public class RequestController implements AuthenticationService{
 	public void custDeposit(Context ctx) {       //for deposits
 		
 		String user = ctx.formParam("username");
-		String check = ctx.cachedSessionAttribute("username").toString(); 
+		String check = ctx.cachedSessionAttribute("username"); 
 		
 		if(user.equalsIgnoreCase(check)) {
 
