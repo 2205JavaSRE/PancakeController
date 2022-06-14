@@ -1,9 +1,9 @@
 services:
   P1_ERSapi:
-    image: 'p2-image:new'
+    image: 'p2-image'
     container_name: p2-deploy
     ports:
-      - 7450:7450
+      - 7070:7070
     environment:
       - db_url=jdbc:postgresql://database-2.cjdho29bgj7p.us-east-1.rds.amazonaws.com/postgres
       - db_username=postgres
