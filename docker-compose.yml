@@ -1,6 +1,6 @@
 services:
-  P1_ERSapi:
-    image: 'p2-image:new'
+  p2-bank-api:
+    image: 'pancake-bank-app'
     container_name: p2-deploy
     ports:
       - 7450:7450

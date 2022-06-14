@@ -6,6 +6,6 @@ RUN mvn clean package
 
 FROM openjdk:8-jre
 
-COPY --from=BUILD_STAGE /target/Project1-0.0.1-SNAPSHOT-shaded.jar /demo.jar
+COPY --from=BUILD_STAGE /target/Project1-0.0.1-SNAPSHOT-shaded.jar /pancake-bank.jar
 
-CMD ["java","-jar","/demo.jar"]
+CMD ["java","-jar","pancake-bank.jar"]
