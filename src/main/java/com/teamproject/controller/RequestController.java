@@ -18,6 +18,7 @@ public class RequestController implements AuthenticationService{
 		super();
 	}
 	static PrometheusMeterRegistry registry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
+	static RequestDAO req = new RequestDAO();
 	
 	//-----------------------------------login
 	public void login(Context ctx) {
@@ -46,7 +47,7 @@ public class RequestController implements AuthenticationService{
 		
 		if(user.equalsIgnoreCase(check)) {
 
-			 RequestDAO req = new RequestDAO();
+			 
 			 
 			 try {
 				req.getAccount(ctx, check);
@@ -83,8 +84,6 @@ public class RequestController implements AuthenticationService{
 		String check = ctx.cachedSessionAttribute("username");
 		
 		if(user.equalsIgnoreCase(check)) {
-
-			 RequestDAO req = new RequestDAO();
 			 
 			 req.withdraw(ctx, check);
 			ctx.status(200);
@@ -102,8 +101,6 @@ public class RequestController implements AuthenticationService{
 		
 		if(user.equalsIgnoreCase(check)) {
 
-			 RequestDAO req = new RequestDAO();
-			 
 			 req.transfer(ctx, check, acctNum);
 			ctx.status(200);
 			 
@@ -117,13 +114,21 @@ public class RequestController implements AuthenticationService{
 		String pass = ctx.formParam("password");
 		double balance = Double.parseDouble(ctx.formParam("balance"));
 		
-		RequestDAO req = new RequestDAO();
-		
 		req.createAcct(ctx, user, pass, balance);
 		ctx.status(201);
 	}
 		
-
+	public void getAllAccts(Context ctx) throws SQLException { //this security checks the session to make sure "manager" is logged in
+		
+		String username = "manager";
+		if (username.equals(ctx.cachedSessionAttribute("username")))
+				{
+				
+				req.getAllAccounts(ctx);
+				
+				} else { ctx.status(408); }
+		
+	}
 
 	
 }

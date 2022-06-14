@@ -63,6 +63,13 @@ public class RequestMapping {
 				
 			});
 			
+			//management endpoint for viewing all accounts
+			//----------------------------------------------------------------------------------------------
+			app.get("/admin/viewaccounts", ctx ->{
+				
+				req.getAllAccts(ctx);
+			});
+			
 			
 			//----------------------------------------------------------------------------------------------
 			//endpoint for logging out

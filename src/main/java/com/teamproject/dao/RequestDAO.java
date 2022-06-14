@@ -157,4 +157,24 @@ public class RequestDAO implements RequestService {
 		
 	}
 	
+	public void getAllAccounts(Context ctx) throws SQLException { //used by managers to view all account info
+		
+		String sql = "SELECT * FROM accounts"; 
+		Connection connection = ConnectionFactory.connectUser();
+		Statement stmt= connection.createStatement();
+		ResultSet rs = stmt.executeQuery(sql);
+		ArrayList<CustomerRequest> a = new ArrayList<>();
+		while(rs.next()) {
+			 CustomerRequest e = new CustomerRequest(rs.getInt("acctnum"), rs.getString("username"), rs.getDouble("balance"), rs.getString("timestamp"));
+			 a.add(e);
+			for (CustomerRequest x : a) {
+			ctx.json(a);
+			System.out.println(a);
+			}
+		
+		}
+		
+		
+	}
+	
 }
