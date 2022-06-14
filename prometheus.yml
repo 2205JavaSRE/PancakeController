@@ -1,0 +1,13 @@
+global:
+  scrape_interval: 15s
+  
+scrape_configs:
+  - job_name: 'prometheus'
+    scrape_interval: 5s
+    static_configs:
+      - targets: ['localhost:9090']
+      
+  - job_name: 'micrometer-example'
+    metrics_path: '/monitor'
+    static_configs:
+      - targets: ['P1_ERSapi:7465']
