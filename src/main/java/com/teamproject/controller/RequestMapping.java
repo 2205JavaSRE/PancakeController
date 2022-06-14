@@ -68,6 +68,13 @@ public class RequestMapping {
 			app.get("/admin/viewaccounts", ctx ->{
 				
 				req.getAllAccts(ctx);
+				
+			});
+			
+			app.post("/admin/closeaccount", ctx -> {
+				
+				req.closeAcct(ctx);
+				
 			});
 			
 			

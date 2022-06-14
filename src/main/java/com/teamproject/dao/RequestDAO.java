@@ -201,4 +201,20 @@ public class RequestDAO implements RequestService {
 		
 	}
 	
+	public void closeAccount(Context ctx, String username) throws SQLException { //admin priviledge required
+		
+		
+		String sql = "DELETE FROM accounts WHERE username= ?";
+		Connection connection = ConnectionFactory.connectUser();
+		PreparedStatement ps = connection.prepareStatement(sql);
+		ps.setString(1, username);
+		ps.executeUpdate();
+		String sql2 = "DELETE FROM users WHERE username = ?";
+		PreparedStatement ps1 = connection.prepareStatement(sql2);
+		ps1.setString(1, username);
+		ps1.executeUpdate();
+		
+		
+	}
+	
 }

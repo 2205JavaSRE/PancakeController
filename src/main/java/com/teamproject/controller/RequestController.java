@@ -129,6 +129,19 @@ public class RequestController implements AuthenticationService{
 				} else { ctx.status(408); }
 		
 	}
+	
+	public void closeAcct(Context ctx) throws SQLException { 
+		
+		String username = "manager";
+		if (username.equals(ctx.cachedSessionAttribute("username"))) //checks the session to make sure "manager" is logged in
+				{
+				String user = ctx.formParam("user");
+				
+				req.closeAccount(ctx, user);
+				
+				} else { ctx.status(408); }
+		
+	}
 
 	
 }
