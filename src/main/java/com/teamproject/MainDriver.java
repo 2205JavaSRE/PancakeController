@@ -20,7 +20,6 @@ public class MainDriver {
 
 		PrometheusMeterRegistry registry = MicrometerMonitorController.StartMonitoringRegistry();
 		Javalin app = Javalin.create( config -> {
-			config.registerPlugin(new MicrometerPlugin(Prometheus.registry));
 			config.registerPlugin(new MicrometerPlugin(registry));
 				}
 				).start(7070);
