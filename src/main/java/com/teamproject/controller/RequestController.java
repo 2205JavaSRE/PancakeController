@@ -62,7 +62,7 @@ public class RequestController implements AuthenticationService{
 	public void custDeposit(Context ctx) {       //for deposits
 		
 		String user = ctx.formParam("username");
-		String check = ctx.cachedSessionAttribute("username").toString(); 
+		String check = ctx.cachedSessionAttribute("username"); 
 		
 		if(user.equalsIgnoreCase(check)) {
 
@@ -117,16 +117,43 @@ public class RequestController implements AuthenticationService{
 		req.createAcct(ctx, user, pass, balance);
 		ctx.status(201);
 	}
-		
+	
+	//---------------------------------------------------------functions for managers	
 	public void getAllAccts(Context ctx) throws SQLException { //this security checks the session to make sure "manager" is logged in
 		
-		String username = "manager";
+		String username = "manager";  //hard-coded this because it is assumed management will share credentials
 		if (username.equals(ctx.cachedSessionAttribute("username")))
 				{
 				
 				req.getAllAccounts(ctx);
 				
 				} else { ctx.status(408); }
+		
+	}
+	
+	public void closeAcct(Context ctx) throws SQLException { 
+		
+		String username = "manager"; 
+		if (username.equals(ctx.cachedSessionAttribute("username"))) //checks the session to make sure "manager" is logged in
+				{
+				String user = ctx.formParam("user");
+				
+				req.closeAccount(ctx, user);
+				
+				} else { ctx.status(408); }
+		
+	}
+	
+	public void history(Context ctx) throws SQLException {
+		
+		String username = "manager";
+		if (username.equals(ctx.cachedSessionAttribute("username"))) 
+		{
+		
+		req.getHistory(ctx);
+		
+		} else { ctx.status(408); }
+		
 		
 	}
 

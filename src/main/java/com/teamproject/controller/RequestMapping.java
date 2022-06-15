@@ -29,6 +29,14 @@ public class RequestMapping {
 				}
 				
 				});
+			
+			app.before("/admin/*", ctx -> {  
+				
+				if(!authDao.check()) {
+				ctx.status(403);
+				}
+				
+				});
 				
 			
 			//customer endpoints
@@ -65,9 +73,22 @@ public class RequestMapping {
 			
 			//management endpoint for viewing all accounts
 			//----------------------------------------------------------------------------------------------
+			
 			app.get("/admin/viewaccounts", ctx ->{
 				
 				req.getAllAccts(ctx);
+				
+			});
+			
+			app.post("/admin/closeaccount", ctx -> {
+				
+				req.closeAcct(ctx);
+				
+			});
+			
+			app.get("/admin/history", ctx -> {
+				
+				req.history(ctx);
 			});
 			
 			
