@@ -21,6 +21,7 @@ public class RequestDAO implements RequestService {
 	public RequestDAO() {
 		super();	
 	}
+
 	
 	public void getAccount(Context ctx, String username) throws SQLException{
 		
@@ -82,12 +83,12 @@ public class RequestDAO implements RequestService {
 					ps1.setDouble(1, balance);
 					ps1.setString(2, username);
 					ps1.executeUpdate();
-					;
-					
 					} 
+					updateHistory();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
+		
 		
 }
 	
@@ -142,7 +143,7 @@ public class RequestDAO implements RequestService {
 					ps3.setDouble(1, balance1);
 					ps3.setInt(2, acctNum);				
 					} 
-					
+					updateHistory();
 				}
 	
 			}
@@ -175,6 +176,7 @@ public class RequestDAO implements RequestService {
 	      ps3.setDouble(2, balance);
 	      ps3.setInt(3, acctNum);
 	      ps3.executeUpdate();
+	      updateHistory();
 	   
 
 		
@@ -216,6 +218,43 @@ public class RequestDAO implements RequestService {
 		ps1.executeUpdate();
 		
 		
+	}
+	
+	public void getHistory(Context ctx) throws SQLException {
+		
+		String sql = "SELECT * FROM history";
+		Connection connection = ConnectionFactory.connectUser();
+		PreparedStatement ps = connection.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		ArrayList<CustomerRequest> c = new ArrayList<>();
+		while(rs.next()) {
+			CustomerRequest a = new CustomerRequest(rs.getInt("acctnum"), rs.getString("username"), rs.getDouble("balance"), rs.getString("timestamp"));
+			c.add(a);
+		}
+		for (CustomerRequest x : c)
+			ctx.json(c);	
+	}
+	
+	public void updateHistory() throws SQLException { //transaction history is defined as a change in the customer's account balance
+		
+		String sql = "SELECT * FROM accounts";
+		Connection connection = ConnectionFactory.connectUser();
+		PreparedStatement ps = connection.prepareStatement(sql);
+		ResultSet rs = ps.executeQuery();
+		
+		ArrayList<CustomerRequest> c = new ArrayList<>();
+		while(rs.next()) {
+			CustomerRequest a = new CustomerRequest(rs.getInt("acctnum"), rs.getString("username"), rs.getDouble("balance"), rs.getString("timestamp"));
+			String sql1 = "INSERT INTO history VALUES (?, ?, ?)";
+			PreparedStatement ps1 = connection.prepareStatement(sql1);
+			ps1.setInt(1, a.getAcctnum());
+			ps1.setString(2, a.getUsername());
+			ps1.setDouble(3, a.getBalance());
+			ps1.executeUpdate();
+			c.add(a);
+		}
+			
 	}
 	
 }
