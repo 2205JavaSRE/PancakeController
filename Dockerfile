@@ -9,3 +9,4 @@ FROM openjdk:8-jre
 COPY --from=BUILD_STAGE /target/Project1-0.0.1-SNAPSHOT-shaded.jar /pancake-bank.jar
 
 CMD ["java","-jar","pancake-bank.jar"]
+

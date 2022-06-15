@@ -33,7 +33,7 @@ public class MicrometerMonitorController {
 	}
 	
 	public static void MoniteringPaths(Javalin app, PrometheusMeterRegistry registry) {
-		
+
 		app.get("/metrics", ctx ->{
 			ctx.result(registry.scrape());
 		});
