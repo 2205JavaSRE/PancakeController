@@ -18,6 +18,7 @@ public class RequestController implements AuthenticationService{
 		super();
 	}
 	static PrometheusMeterRegistry registry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
+	static RequestDAO req = new RequestDAO();
 	
 	//-----------------------------------login
 	public void login(Context ctx) {
@@ -46,7 +47,7 @@ public class RequestController implements AuthenticationService{
 		
 		if(user.equalsIgnoreCase(check)) {
 
-			 RequestDAO req = new RequestDAO();
+			 
 			 
 			 try {
 				req.getAccount(ctx, check);
@@ -61,7 +62,7 @@ public class RequestController implements AuthenticationService{
 	public void custDeposit(Context ctx) {       //for deposits
 		
 		String user = ctx.formParam("username");
-		String check = ctx.cachedSessionAttribute("username").toString(); 
+		String check = ctx.cachedSessionAttribute("username"); 
 		
 		if(user.equalsIgnoreCase(check)) {
 
@@ -83,8 +84,6 @@ public class RequestController implements AuthenticationService{
 		String check = ctx.cachedSessionAttribute("username");
 		
 		if(user.equalsIgnoreCase(check)) {
-
-			 RequestDAO req = new RequestDAO();
 			 
 			 req.withdraw(ctx, check);
 			ctx.status(200);
@@ -102,8 +101,6 @@ public class RequestController implements AuthenticationService{
 		
 		if(user.equalsIgnoreCase(check)) {
 
-			 RequestDAO req = new RequestDAO();
-			 
 			 req.transfer(ctx, check, acctNum);
 			ctx.status(200);
 			 
@@ -117,13 +114,48 @@ public class RequestController implements AuthenticationService{
 		String pass = ctx.formParam("password");
 		double balance = Double.parseDouble(ctx.formParam("balance"));
 		
-		RequestDAO req = new RequestDAO();
-		
 		req.createAcct(ctx, user, pass, balance);
 		ctx.status(201);
 	}
+	
+	//---------------------------------------------------------functions for managers	
+	public void getAllAccts(Context ctx) throws SQLException { //this security checks the session to make sure "manager" is logged in
 		
-
+		String username = "manager";  //hard-coded this because it is assumed management will share credentials
+		if (username.equals(ctx.cachedSessionAttribute("username")))
+				{
+				
+				req.getAllAccounts(ctx);
+				
+				} else { ctx.status(408); }
+		
+	}
+	
+	public void closeAcct(Context ctx) throws SQLException { 
+		
+		String username = "manager"; 
+		if (username.equals(ctx.cachedSessionAttribute("username"))) //checks the session to make sure "manager" is logged in
+				{
+				String user = ctx.formParam("user");
+				
+				req.closeAccount(ctx, user);
+				
+				} else { ctx.status(408); }
+		
+	}
+	
+	public void history(Context ctx) throws SQLException {
+		
+		String username = "manager";
+		if (username.equals(ctx.cachedSessionAttribute("username"))) 
+		{
+		
+		req.getHistory(ctx);
+		
+		} else { ctx.status(408); }
+		
+		
+	}
 
 	
 }

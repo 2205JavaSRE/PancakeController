@@ -10,8 +10,8 @@ scrape_configs:
   - job_name: 'micrometer-example'
     metrics_path: '/prometheus'
     static_configs:
-<<<<<<< HEAD
       - targets: ['']
-=======
-      - targets: ['p2-deploy:7070']
->>>>>>> ee4c30fe2cd1fffb71fb047b71ae96573962f143
+
+    metrics_path: '/monitor'
+    static_configs:
+      - targets: ['P1_ERSapi:7465']

@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 C:\Users\Me\Documents\RevProject2\ForReal\PancakeController\src\main\java\com\teamproject\util\ConnectionFactory.java
 C:\Users\Me\Documents\RevProject2\ForReal\PancakeController\src\main\java\com\teamproject\dao\AuthenticationDAO.java
 C:\Users\Me\Documents\RevProject2\ForReal\PancakeController\src\main\java\com\teamproject\controller\MicrometerMonitorController.java
@@ -10,16 +9,3 @@ C:\Users\Me\Documents\RevProject2\ForReal\PancakeController\src\main\java\com\te
 C:\Users\Me\Documents\RevProject2\ForReal\PancakeController\src\main\java\com\teamproject\controller\RequestMapping.java
 C:\Users\Me\Documents\RevProject2\ForReal\PancakeController\src\main\java\com\teamproject\util\Prometheus.java
 C:\Users\Me\Documents\RevProject2\ForReal\PancakeController\src\main\java\com\teamproject\service\AuthenticationService.java
-=======
-/home/ec2-user/git-folder/PancakeController/src/main/java/com/teamproject/controller/MicrometerMonitorController.java
-/home/ec2-user/git-folder/PancakeController/src/main/java/com/teamproject/dao/RequestDAO.java
-/home/ec2-user/git-folder/PancakeController/src/main/java/com/teamproject/models/CustomerRequest.java
-/home/ec2-user/git-folder/PancakeController/src/main/java/com/teamproject/controller/RequestController.java
-/home/ec2-user/git-folder/PancakeController/src/main/java/com/teamproject/dao/AuthenticationDAO.java
-/home/ec2-user/git-folder/PancakeController/src/main/java/com/teamproject/util/Prometheus.java
-/home/ec2-user/git-folder/PancakeController/src/main/java/com/teamproject/controller/RequestMapping.java
-/home/ec2-user/git-folder/PancakeController/src/main/java/com/teamproject/util/ConnectionFactory.java
-/home/ec2-user/git-folder/PancakeController/src/main/java/com/teamproject/service/RequestService.java
-/home/ec2-user/git-folder/PancakeController/src/main/java/com/teamproject/MainDriver.java
-/home/ec2-user/git-folder/PancakeController/src/main/java/com/teamproject/service/AuthenticationService.java
->>>>>>> ee4c30fe2cd1fffb71fb047b71ae96573962f143

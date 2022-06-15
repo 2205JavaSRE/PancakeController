@@ -1,18 +1,17 @@
 services:
 <<<<<<< HEAD
+<<<<<<< HEAD
   p2-bank-api:
     image: 'pancake-bank-app'
-=======
   P1_ERSapi:
-    image: 'p2-image'
->>>>>>> ee4c30fe2cd1fffb71fb047b71ae96573962f143
+    image: 'p2-image:new'
     container_name: p2-deploy
     ports:
-      - 7070:7070
+      - 7450:7450
     environment:
       - db_url=jdbc:postgresql://database-2.cjdho29bgj7p.us-east-1.rds.amazonaws.com/postgres
-      - db_username=postgres
-      - db_password=ragingbull
+      - db_user=postgres
+      - db_pass=***************************
   prom:
     image: 'prom/prometheus'
     container_name: prom
