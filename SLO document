@@ -2,3 +2,6 @@ Each team must define SLO for their application
   - must include error rates as well as latencies
   - must include their custom metric
   Each team must define alerting rules based on their SLO
+
+** Please refer to google docs for the Pancake Controller SLO **
+https://docs.google.com/document/d/1fb3xZpQt5-oCME418yiFxkF-lZR95CvlNnEkBMsnYDQ/edit?usp=sharing
