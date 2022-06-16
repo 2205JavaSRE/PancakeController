@@ -12,5 +12,13 @@ Things done:
 - Set up micrometer and prometheus
 - Set up yml file for docker compose
 
+6/16
+Things done:
+- Created a jenkins pipeline for the project
+- Started SLO document
+
+Things to work on:
+- Check methods in java program for incorrect user inputs
+- Setup grafana
 
 
