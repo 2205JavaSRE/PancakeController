@@ -21,4 +21,16 @@ Things to work on:
 - Check methods in java program for incorrect user inputs
 - Setup grafana
 
+6/17
+Things done:
+- Continued working on the SLO document
+- Started jenkin pipleline
+Items left to work on:
+- Setting up grafana metrics
+- Setting up terraform
+- Finishing the pipeline
+Current issues:
+- figuring out what metrics to use
+- figuring out how to set up prometheus and grafana on the kubernetes cluster
+
 
