@@ -17,7 +17,7 @@ public class MicrometerMonitorController {
 	public static PrometheusMeterRegistry StartMonitoringRegistry() {
 		PrometheusMeterRegistry registry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
 		
-		registry.config().commonTags("application", "Reinbursement Monitor");
+		registry.config().commonTags("application", "Pancake Bank Monitor");
 		
 		new ClassLoaderMetrics().bindTo(registry);
 		new JvmMemoryMetrics().bindTo(registry);
