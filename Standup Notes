@@ -1,0 +1,36 @@
+6/14
+Jason: Created initial project java layout from project 1 and 0.
+Norioki: worked on creating a micrometer 
+Justin: catched up on monitoring lectures
+Chase:
+
+Things to work on:
+  - check on account number and username for duplicates
+
+6/15
+Things done:
+- Set up micrometer and prometheus
+- Set up yml file for docker compose
+
+6/16
+Things done:
+- Created a jenkins pipeline for the project
+- Started SLO document
+
+Things to work on:
+- Check methods in java program for incorrect user inputs
+- Setup grafana
+
+6/17
+Things done:
+- Continued working on the SLO document
+- Started jenkin pipleline
+Items left to work on:
+- Setting up grafana metrics
+- Setting up terraform
+- Finishing the pipeline
+Current issues:
+- figuring out what metrics to use
+- figuring out how to set up prometheus and grafana on the kubernetes cluster
+
+

@@ -1,5 +1,9 @@
 Manifest-Version: 1.0
+<<<<<<< HEAD
 Built-By: unsho
+=======
+Built-By: Me
+>>>>>>> 06c73b6d5931330599a83bfa8fc6ebc2003db937
 Build-Jdk: 17.0.2
 Created-By: Maven Integration for Eclipse
 
