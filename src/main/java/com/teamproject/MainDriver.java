@@ -18,25 +18,24 @@ public class MainDriver {
 	
 
 
-	public static void main(String...args) {
+	public static void main(String...args) { //jenkins
 
-		PrometheusMeterRegistry registry = MicrometerMonitorController.StartMonitoringRegistry();
+
 		Javalin app = Javalin.create( config -> {
-			config.registerPlugin(new MicrometerPlugin(registry));
+			config.registerPlugin(new MicrometerPlugin(Prometheus.registry));
 				}
 				).start(7070);
 		
 		 RequestMapping.configureRoutes(app);
 	
-		 MicrometerMonitorController.MoniteringPaths(app, registry);
+		
 		
 		 
 			
-//		 app.get("/prometheus", ctx -> {
-//				 
-//				 ctx.result(Prometheus.registry.scrape());
-//			 });
-		
+		 app.get("/prometheus", ctx -> {
+				 
+				 ctx.result(Prometheus.registry.scrape());
+			 });
 	}
 	
 	 

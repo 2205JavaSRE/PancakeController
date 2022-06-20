@@ -16,7 +16,7 @@ import com.teamproject.util.ConnectionFactory;
 import io.javalin.http.Context;
 
 
-public class RequestDAO implements RequestService {
+public class RequestDAO  {
 
 	public RequestDAO() {
 		super();	
