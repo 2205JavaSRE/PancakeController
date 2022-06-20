@@ -13,31 +13,34 @@ import com.teamproject.controller.*;
 
 
 public class MainDriver {
-	
-
-	
 
 
 	public static void main(String...args) { //jenkins
 
-
+		Prometheus.monitoring();
+		
 		Javalin app = Javalin.create( config -> {
 			config.registerPlugin(new MicrometerPlugin(Prometheus.registry));
 				}
 				).start(7070);
 		
+		 MicrometerMonitorController.MoniteringPaths(app, Prometheus.registry);
+
 		 RequestMapping.configureRoutes(app);
 	
 		
-		
 		 
-			
-		 app.get("/prometheus", ctx -> {
-				 
-				 ctx.result(Prometheus.registry.scrape());
-			 });
-	}
-	
+		 
+		
+//using different class		 
+//			
+//		 app.get("/prometheus", ctx -> {
+//				 
+//				 ctx.result(Prometheus.registry.scrape());
+//			 });
+//	}
+//	
 	 
 
+	}
 }

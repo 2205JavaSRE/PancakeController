@@ -35,7 +35,7 @@ public class Prometheus {
 		return counter.count();
 			}
 	
-	public void monitoring() {
+	public static void monitoring() {
 		
 			
 		
@@ -52,15 +52,7 @@ public class Prometheus {
 	 new ProcessorMetrics().bindTo(registry);
 	 new DiskSpaceMetrics(new File(System.getProperty("user.dir"))).bindTo(registry);
 	 
-	
-		
-	
 
-	 
-	
-	
-	 
-	
 
 	}
 

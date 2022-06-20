@@ -3,9 +3,17 @@ com\teamproject\service\AuthenticationService.class
 com\teamproject\dao\AuthenticationDAO.class
 com\teamproject\controller\RequestMapping.class
 com\teamproject\controller\RequestController.class
+<<<<<<< HEAD
+com\teamproject\dao\AuthenticationDAOImpl.class
+=======
+>>>>>>> a3eab4793aad282584134300dee8a11d46b77abd
 com\teamproject\util\ConnectionFactory.class
 com\teamproject\models\CustomerRequest.class
 com\teamproject\util\Prometheus.class
 com\teamproject\service\RequestService.class
+<<<<<<< HEAD
+com\teamproject\service\RequestServiceImpl.class
+=======
+>>>>>>> a3eab4793aad282584134300dee8a11d46b77abd
 com\teamproject\controller\MicrometerMonitorController.class
 com\teamproject\dao\RequestDAO.class
