@@ -1,0 +1,24 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: pancake-controller-bank-app
+  namespace: pancake-controller-space
+  labels:
+    app: pancake-bank-app
+spec:
+  selector:
+    matchLabels:
+      app: pancake-bank-app
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: pancake-bank-app
+    spec:
+      containers:
+      - name: pancake-bank-deployment
+        image: revnkog/project-2-bank
+        ports:
+        - containerPort: 7070
+        imagePullPolicy: Always
+
