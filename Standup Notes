@@ -33,4 +33,10 @@ Current issues:
 - figuring out what metrics to use
 - figuring out how to set up prometheus and grafana on the kubernetes cluster
 
+6/20
+Items to work on:
+- powerpoint
+- custom metrics
+- Terraform
+- finish jenkins
 
