@@ -17,7 +17,7 @@ spec:
     spec:
       containers:
       - name: pancake-bank-deployment
-        image: revnkog/project-2-bank
+        image: chance562/project2:new
         ports:
         - containerPort: 7070
         imagePullPolicy: Always
