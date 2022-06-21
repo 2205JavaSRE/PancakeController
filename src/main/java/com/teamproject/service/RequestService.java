@@ -6,7 +6,7 @@ import io.javalin.http.Context;
 
 public interface RequestService {
 	
-	public void login(Context ctx);
+	
 	public void getAcct(Context ctx);
 	public void custDeposit(Context ctx);
 	public void custWithdraw(Context ctx);

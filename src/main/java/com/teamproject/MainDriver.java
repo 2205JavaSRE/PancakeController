@@ -18,7 +18,7 @@ public class MainDriver {
 	
 
 
-	public static void main(String...args) { //jenkins
+	public static void main(String...args) { 
 
 
 		Javalin app = Javalin.create( config -> {
