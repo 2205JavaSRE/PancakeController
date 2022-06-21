@@ -13,7 +13,7 @@ import io.micrometer.core.instrument.binder.system.UptimeMetrics;
 import io.micrometer.prometheus.PrometheusConfig;
 import io.micrometer.prometheus.PrometheusMeterRegistry;
 
-public class MicrometerMonitorController {
+public class MicrometerMonitor {
 	public static PrometheusMeterRegistry StartMonitoringRegistry() {
 		PrometheusMeterRegistry registry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
 		
