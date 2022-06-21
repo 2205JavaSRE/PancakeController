@@ -29,6 +29,7 @@ public class RequestServiceImpl implements RequestService, AuthenticationService
 						ctx.sessionAttribute("password", password);
 						
 						ctx.status(201);
+						ctx.result("Welcome!");
 						} else {
 							ctx.status(403);
 						}
