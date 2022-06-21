@@ -2,21 +2,14 @@ package com.teamproject.controller;
 
 import java.sql.SQLException;
 
-import com.teamproject.dao.AuthenticationDAO;
-import com.teamproject.dao.AuthenticationDAOImpl;
-import com.teamproject.dao.RequestDAO;
-import com.teamproject.service.AuthenticationService;
-import com.teamproject.service.RequestService;
+import com.teamproject.service.AuthenticationServiceImpl;
 import com.teamproject.service.RequestServiceImpl;
-import com.teamproject.util.Prometheus;
-
 import io.javalin.http.Context;
-import io.micrometer.prometheus.PrometheusConfig;
-import io.micrometer.prometheus.PrometheusMeterRegistry;
 
 public class RequestController {
 
 	public RequestServiceImpl req = new RequestServiceImpl();
+	public AuthenticationServiceImpl auth = new AuthenticationServiceImpl();
 	
 	public RequestController() {
 		super();
@@ -26,7 +19,7 @@ public class RequestController {
 	//-----------------------------------login
 	public void login(Context ctx) {
 		
-		req.login(ctx);
+		auth.login(ctx);
 		
 	}
 

@@ -1,4 +1,4 @@
-package com.teamproject.controller;
+package com.teamproject.util;
 
 import java.io.File;
 
@@ -13,26 +13,7 @@ import io.micrometer.core.instrument.binder.system.UptimeMetrics;
 import io.micrometer.prometheus.PrometheusConfig;
 import io.micrometer.prometheus.PrometheusMeterRegistry;
 
-public class MicrometerMonitorController {
-//	public static PrometheusMeterRegistry StartMonitoringRegistry() {
-//		PrometheusMeterRegistry registry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
-//		
-//		registry.config().commonTags("application", "Pancake Bank Monitor");
-//		
-//		new ClassLoaderMetrics().bindTo(registry);
-//		new JvmMemoryMetrics().bindTo(registry);
-//		new JvmGcMetrics().bindTo(registry);
-//		new JvmThreadMetrics().bindTo(registry);
-//		new UptimeMetrics().bindTo(registry);
-//		new ProcessorMetrics().bindTo(registry);
-//		new DiskSpaceMetrics(new File(System.getProperty("user.dir"))).bindTo(registry);
-//		
-//		
-//		return registry;
-//		
-//	}
-	//redundant
-	
+public class MicrometerMonitor {	
 	public static void MoniteringPaths(Javalin app, PrometheusMeterRegistry registry) {
 
 		app.get("/metrics", ctx ->{
@@ -41,4 +22,5 @@ public class MicrometerMonitorController {
 		
 		
 	}
+	
 }

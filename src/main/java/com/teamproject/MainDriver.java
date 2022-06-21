@@ -5,6 +5,7 @@ import io.javalin.plugin.metrics.MicrometerPlugin;
 import io.micrometer.prometheus.PrometheusMeterRegistry;
 
 import com.teamproject.util.*;
+import com.teamproject.util.MicrometerMonitor;
 import com.teamproject.controller.RequestMapping;
 import com.teamproject.util.Prometheus;
 import com.teamproject.controller.*;
@@ -15,7 +16,7 @@ import com.teamproject.controller.*;
 public class MainDriver {
 
 
-	public static void main(String...args) { //jenkins
+	public static void main(String...args) { 
 
 		Prometheus.monitoring();
 		
@@ -24,7 +25,7 @@ public class MainDriver {
 				}
 				).start(7070);
 		
-		 MicrometerMonitorController.MoniteringPaths(app, Prometheus.registry);
+		 MicrometerMonitor.MoniteringPaths(app, Prometheus.registry);
 
 		 RequestMapping.configureRoutes(app);
 	
