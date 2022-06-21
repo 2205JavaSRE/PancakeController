@@ -28,30 +28,33 @@ pipeline {
                 }
             }
         }
-		stage("Waiting for approval"){
-			steps{
-				script{
-					try {
-						timeout(time: 6, unit: 'HOURS'){
-							approved = input message: 'Deploy to production?', ok: 'Continue',
-								parameters: [choice(name: 'approved', choices: 'Yes\nNo', description: 'Deploy this build to production')]
-							if(approved != 'Yes'){
-								error('Build not approved')
-							}
-						}
-					} catch (error){
-						error('Build not approved in time')
-					}
-				}
-			}
-		}
+		// stage("Waiting for approval"){
+		// 	steps{
+		// 		script{
+		// 			try {
+		// 				timeout(time: 6, unit: 'HOURS'){
+		// 					approved = input message: 'Deploy to production?', ok: 'Continue',
+		// 						parameters: [choice(name: 'approved', choices: 'Yes\nNo', description: 'Deploy this build to production')]
+		// 					if(approved != 'Yes'){
+		// 						error('Build not approved')
+		// 					}
+		// 				}
+		// 			} catch (error){
+		// 				error('Build not approved in time')
+		// 			}
+		// 		}
+		// 	}
+		// }
 		stage("Deploying to Kubernetes production environment"){
 			steps{
 				script{
 				    sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
                     sh 'chmod u+x ./kubectl'
-					sh './kubectl delete -f yamlFiles_for_Deployment/bank-service-deployment.yml -n pancake-controller-space'
-                    sh './kubectl apply -f yamlFiles_for_Deployment/bank-service-deployment.yml -n pancake-controller-space'
+					sh 'echo $registry'
+					sh 'echo $registry:$currentBuild.number'
+					sh './kubectl set image -n pancake-controller-space deployment/pancake-controller-bank-app pancake-bank-deployment=$registry:$currentBuild.number'
+					//sh './kubectl delete -f yamlFiles_for_Deployment/bank-service-deployment.yml -n pancake-controller-space'
+                    //sh './kubectl apply -f yamlFiles_for_Deployment/bank-service-deployment.yml -n pancake-controller-space'
 				}
 			}
 		}
