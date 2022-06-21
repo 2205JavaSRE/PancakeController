@@ -1,14 +1,14 @@
 pipeline {
 	agent any
 	environment{
-		registry='chance562/project2'
-        	dockerImage=''
-        	dockerHubCredentials='DockerHub'
+		registry='revnkog/project2'
+        dockerImage=''
+        dockerHubCredentials='DockerHub'
 	}
 	stages{
 		stage("Maven build"){
 			steps{
-				sh '/usr/local/apache-maven/bin/mvn clean package'
+				sh '/usr/bin/mvn clean package'
 			}
 		}
 		stage("Docker build"){
@@ -19,15 +19,15 @@ pipeline {
 			}
 		}
 		stage("Pushing to DockerHub Registry"){
-            		steps{
-                		script{
-                    			docker.withRegistry('',dockerHubCredentials){
-                        			dockerImage.push("$currentBuild.number")
-                        			dockerImage.push("latest")
-                    			}
-                		}
-            		}
-        	}
+            steps{
+                script{
+                    docker.withRegistry('',dockerHubCredentials){
+                        dockerImage.push("$currentBuild.number")
+                        dockerImage.push("latest")
+                    }
+                }
+            }
+        }
 		stage("Waiting for approval"){
 			steps{
 				script{
@@ -48,8 +48,10 @@ pipeline {
 		stage("Deploying to Kubernetes production environment"){
 			steps{
 				script{
-					sh 'kubectl delete -f yamlFiles_for_Deployment/bank-service-deployment.yml'
-                                        sh 'kubectl apply -f yamlFiles_for_Deployment/bank-service-deployment.yml'
+				    sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
+                    sh 'chmod u+x ./kubectl'
+					sh './kubectl delete -f yamlFiles_for_Deployment/bank-service-deployment.yml -n pancake-controller-space'
+                    sh './kubectl apply -f yamlFiles_for_Deployment/bank-service-deployment.yml -n pancake-controller-space'
 				}
 			}
 		}
