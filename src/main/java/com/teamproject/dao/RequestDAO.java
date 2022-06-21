@@ -4,19 +4,20 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Statement;
-import java.text.DecimalFormat;
 import java.util.ArrayList;
 import java.util.Random;
 
 import com.teamproject.models.CustomerRequest;
-import com.teamproject.service.RequestService;
 import com.teamproject.util.ConnectionFactory;
 
 import io.javalin.http.Context;
 
 
+<<<<<<< HEAD
 public class RequestDAO  {
+=======
+public class RequestDAO {
+>>>>>>> 1633c40bd0f9a988a7f1e56d20ae1c96d35ddc16
 
 	public RequestDAO() {
 		super();	

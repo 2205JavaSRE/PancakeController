@@ -2,19 +2,17 @@ package com.teamproject.service;
 
 import java.sql.SQLException;
 
-import com.teamproject.dao.AuthenticationDAOImpl;
 import com.teamproject.dao.RequestDAO;
-import com.teamproject.util.Prometheus;
-
 import io.javalin.http.Context;
 import io.micrometer.prometheus.PrometheusConfig;
 import io.micrometer.prometheus.PrometheusMeterRegistry;
 
-public class RequestServiceImpl implements RequestService, AuthenticationService{
+public class RequestServiceImpl implements RequestService {
 	
 	static PrometheusMeterRegistry registry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
 	static RequestDAO req = new RequestDAO();
 	
+<<<<<<< HEAD
 	//-----------------------------------login
 	public void login(Context ctx) {
 		
@@ -34,6 +32,9 @@ public class RequestServiceImpl implements RequestService, AuthenticationService
 							ctx.status(403);
 						}
 	}
+=======
+
+>>>>>>> 1633c40bd0f9a988a7f1e56d20ae1c96d35ddc16
 	
 	public void getAcct(Context ctx){                          //gets account info
 			
