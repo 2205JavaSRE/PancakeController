@@ -12,29 +12,7 @@ public class RequestServiceImpl implements RequestService {
 	static PrometheusMeterRegistry registry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
 	static RequestDAO req = new RequestDAO();
 	
-<<<<<<< HEAD
-	//-----------------------------------login
-	public void login(Context ctx) {
-		
-				Prometheus prom = new Prometheus();
-				prom.counter();	//updates prometheus for login attempts
-				AuthenticationDAOImpl authDao = new AuthenticationDAOImpl();
-				String username = ctx.formParam("username");
-				String password = ctx.formParam("password");
-				
-					if(authDao.authenticateUser(username, password)) {
-						ctx.sessionAttribute("username", username);
-						ctx.sessionAttribute("password", password);
-						
-						ctx.status(201);
-						ctx.result("Welcome to the Pancake Bank!");
-						} else {
-							ctx.status(403);
-						}
-	}
-=======
 
->>>>>>> 1633c40bd0f9a988a7f1e56d20ae1c96d35ddc16
 	
 	public void getAcct(Context ctx){                          //gets account info
 			

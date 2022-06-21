@@ -41,18 +41,6 @@ public class Prometheus {
 		
 	 registry.config().commonTags("app","monitored-app");
 	 
-	 
-	 
-		
-	 new ClassLoaderMetrics().bindTo(registry);
-	 new JvmMemoryMetrics().bindTo(registry);
-	 new JvmGcMetrics().bindTo(registry);
-	 new JvmThreadMetrics().bindTo(registry);
-	 new UptimeMetrics().bindTo(registry);
-	 new ProcessorMetrics().bindTo(registry);
-	 new DiskSpaceMetrics(new File(System.getProperty("user.dir"))).bindTo(registry);
-	 
-
 
 	}
 
