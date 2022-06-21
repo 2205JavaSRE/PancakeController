@@ -13,7 +13,10 @@ import io.micrometer.core.instrument.binder.system.UptimeMetrics;
 import io.micrometer.prometheus.PrometheusConfig;
 import io.micrometer.prometheus.PrometheusMeterRegistry;
 
+
 public class MicrometerMonitor {	
+
+
 	public static void MoniteringPaths(Javalin app, PrometheusMeterRegistry registry) {
 
 		app.get("/metrics", ctx ->{
