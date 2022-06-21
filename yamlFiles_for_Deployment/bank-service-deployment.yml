@@ -21,4 +21,11 @@ spec:
         ports:
         - containerPort: 7070
         imagePullPolicy: Always
+        env:
+          - name: db_url
+            value: jdbc:postgresql://database-2.cjdho29bgj7p.us-east-1.rds.amazonaws.com/postgres
+          - name: db_user
+            value: postgres
+          - name: db_pass
+            value: ragingbull
 
