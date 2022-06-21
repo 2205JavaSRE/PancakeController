@@ -1,5 +1,5 @@
 # PancakeController
-Project 2 - pancake controller
+Project 2 - Pancake Controller
 # Project 2 requirements
 
 ## Description (Due: 06/24/2022)
