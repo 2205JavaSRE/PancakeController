@@ -52,7 +52,7 @@ pipeline {
                     sh 'chmod u+x ./kubectl'
 					sh 'echo $registry'
 					sh 'echo $registry:$currentBuild.number'
-					sh './kubectl set image -n pancake-controller-space deployment/micro-deployment micrometer-demo-deployment=$registry:$currentBuild.number'
+					sh './kubectl set image -n pancake-controller-space deployment/pancake-controller-bank-app pancake-bank-deployment=$registry:$currentBuild.number'
 					//sh './kubectl delete -f yamlFiles_for_Deployment/bank-service-deployment.yml -n pancake-controller-space'
                     //sh './kubectl apply -f yamlFiles_for_Deployment/bank-service-deployment.yml -n pancake-controller-space'
 				}
