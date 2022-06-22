@@ -33,9 +33,7 @@ public class Prometheus {
 			.tag("purpose", "tracking").register(registry);
 	
 	
-	static Timer loginLatencyTimer = Timer.builder("login_response_latency")
-			.description("How long it takes to execute login")
-			.tag("purpose", "measure any abnormal login response times").register(registry);
+	static Timer loginLatencyTimer = registry.timer("LatencyTimer");
 	
 	public static double counter() {
 			counter.increment(1);
