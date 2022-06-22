@@ -33,26 +33,26 @@ public class Prometheus {
 			.tag("purpose", "tracking").register(registry);
 	
 	
-	static Timer loginLatencyTimer = registry.timer("LatencyTimer");
+//	static Timer loginLatencyTimer = registry.timer("LatencyTimer");
 	
 	public static double counter() {
 			counter.increment(1);
 			return counter.count();
 	}
 	
-	public static void measureLatency() {
-		loginLatencyTimer.record(() ->{
-			try {
-				TimeUnit.MILLISECONDS.sleep(40);
-			}
-			catch (InterruptedException e) {
-				e.printStackTrace();
-			}
-		});
-		
-		loginLatencyTimer.record(30, TimeUnit.MILLISECONDS);
-		
-	}
+//	public static void measureLatency() {
+//		loginLatencyTimer.record(() ->{
+//			try {
+//				TimeUnit.MILLISECONDS.sleep(40);
+//			}
+//			catch (InterruptedException e) {
+//				e.printStackTrace();
+//			}
+//		});
+//		
+//		loginLatencyTimer.record(30, TimeUnit.MILLISECONDS);
+//		
+//	}
 	
 	
 	public static void monitoring() {
