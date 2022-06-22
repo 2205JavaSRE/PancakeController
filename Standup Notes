@@ -41,6 +41,14 @@ Items to work on:
 - finish jenkins
 
 6/21
+Things worked on:
 - finished Jenkins pipeline
 - Continued working on presentation
 - Finish SLO document
+ 
+ 6/22
+ Things worked on:
+ - Configured jenkins to use rolling updates
+ - Set up an s3 bucket
+ - Continued work on the presentation
+ 
