@@ -19,6 +19,7 @@ public class RequestServiceImpl implements RequestService {
 		
 				Prometheus prom = new Prometheus();
 				prom.counter();	//updates prometheus for login attempts
+				prom.measureLatency();
 				AuthenticationDAO authDao = new AuthenticationDAO();
 				String username = ctx.formParam("username");
 				String password = ctx.formParam("password");

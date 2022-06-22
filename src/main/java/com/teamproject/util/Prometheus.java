@@ -1,12 +1,14 @@
 package com.teamproject.util;
 
 import java.io.File;
+import java.util.concurrent.TimeUnit;
 
 import com.teamproject.controller.RequestMapping;
 
 import io.javalin.Javalin;
 import io.javalin.plugin.metrics.MicrometerPlugin;
 import io.micrometer.core.instrument.Counter;
+import io.micrometer.core.instrument.Timer;
 import io.micrometer.core.instrument.binder.jvm.ClassLoaderMetrics;
 import io.micrometer.core.instrument.binder.jvm.JvmGcMetrics;
 import io.micrometer.core.instrument.binder.jvm.JvmMemoryMetrics;
@@ -30,10 +32,30 @@ public class Prometheus {
 			.description("The number of login attempts")
 			.tag("purpose", "tracking").register(registry);
 	
+	
+	static Timer loginLatencyTimer = Timer.builder("login_response_latency")
+			.description("How long it takes to execute login")
+			.tag("purpose", "measure any abnormal login response times").register(registry);
+	
 	public static double counter() {
 			counter.increment(1);
-		return counter.count();
+			return counter.count();
+	}
+	
+	public static void measureLatency() {
+		loginLatencyTimer.record(() ->{
+			try {
+				TimeUnit.MILLISECONDS.sleep(40);
 			}
+			catch (InterruptedException e) {
+				e.printStackTrace();
+			}
+		});
+		
+		loginLatencyTimer.record(30, TimeUnit.MILLISECONDS);
+		
+	}
+	
 	
 	public static void monitoring() {
 		
