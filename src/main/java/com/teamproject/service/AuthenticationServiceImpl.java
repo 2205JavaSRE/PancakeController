@@ -18,7 +18,8 @@ public class AuthenticationServiceImpl implements AuthenticationService{
 		String username = ctx.formParam("username");
 		String password = ctx.formParam("password");
 		
-			if(authDao.authenticateUser(username, password)) {
+
+                       if(authDao.authenticateUser(username, password)) {
 				ctx.cookieStore("username", username);
 				ctx.cookieStore("password", password);
 				

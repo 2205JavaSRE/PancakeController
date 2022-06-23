@@ -14,30 +14,13 @@ public class RequestServiceImpl implements RequestService {
 	static PrometheusMeterRegistry registry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
 	static RequestDAO req = new RequestDAO();
 	
-	//-----------------------------------login
-	public void login(Context ctx) {//IS THIS LOGIN DEPRECIATED(I.E. NOT USING ANYMORE???)
-		
-				Prometheus prom = new Prometheus();
-				prom.counter();	//updates prometheus for login attempts
-				AuthenticationDAO authDao = new AuthenticationDAO();
-				String username = ctx.formParam("username");
-				String password = ctx.formParam("password");
-				
-					if(authDao.authenticateUser(username, password)) {
-						ctx.cookieStore("username", username);
-						ctx.cookieStore("password", password);
-						
-						ctx.status(201);
-						ctx.result("Welcome to the Pancake Bank!");
-						} else {
-							ctx.status(403);
-						}
-	}
-	
 	public void getAcct(Context ctx){                          //gets account info
 			
 					String user = ctx.formParam("username");
 					String check = ctx.cookieStore("username");
+					
+//					System.out.println("DEBUG OUTPUT variable user: " + user);
+//					System.out.println("DEBUG OUTPUT variable check: " + check);
 					
 					if(user.equalsIgnoreCase(check)) {
 			
