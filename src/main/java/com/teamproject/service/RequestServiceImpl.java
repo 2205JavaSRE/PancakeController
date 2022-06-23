@@ -24,8 +24,8 @@ public class RequestServiceImpl implements RequestService {
 				String password = ctx.formParam("password");
 				
 					if(authDao.authenticateUser(username, password)) {
-						ctx.sessionAttribute("username", username);
-						ctx.sessionAttribute("password", password);
+						ctx.cookieStore("username", username);
+						ctx.cookieStore("password", password);
 						
 						ctx.status(201);
 						ctx.result("Welcome to the Pancake Bank!");
@@ -37,7 +37,7 @@ public class RequestServiceImpl implements RequestService {
 	public void getAcct(Context ctx){                          //gets account info
 			
 					String user = ctx.formParam("username");
-					String check = ctx.sessionAttribute("username");
+					String check = ctx.cookieStore("username");
 					
 					if(user.equalsIgnoreCase(check)) {
 			
@@ -56,7 +56,7 @@ public class RequestServiceImpl implements RequestService {
 	public void custDeposit(Context ctx) {       //for deposits
 			
 					String user = ctx.formParam("username");
-					String check = ctx.cachedSessionAttribute("username"); 
+					String check = ctx.cookieStore("username"); 
 					
 					if(user.equalsIgnoreCase(check)) {
 			
@@ -75,7 +75,7 @@ public class RequestServiceImpl implements RequestService {
 	public void custWithdraw(Context ctx) {  //for withdrawals
 			
 					String user = ctx.formParam("username");
-					String check = ctx.cachedSessionAttribute("username");
+					String check = ctx.cookieStore("username");
 					
 					if(user.equalsIgnoreCase(check)) {
 						 
@@ -90,7 +90,7 @@ public class RequestServiceImpl implements RequestService {
 	public void custTransfer(Context ctx) throws SQLException {  //for transfering between accounts (based on account number)
 			
 					String user = ctx.formParam("username");
-					String check = ctx.cachedSessionAttribute("username");
+					String check = ctx.cookieStore("username");
 					int acctNum = Integer.parseInt(ctx.formParam("acctnum"));
 					
 					if(user.equalsIgnoreCase(check)) {
