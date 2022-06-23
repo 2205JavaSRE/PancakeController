@@ -1,0 +1,30 @@
+apiVersion: v1
+kind: Pod 
+metadata:
+  name: pancake-postgres-pod 
+  labels: 
+    app: pancake-postgres 
+spec:  
+  containers: 
+    - name: pancake-postgres-container  
+      image: revnkog/pancake-db 
+      ports: 
+        - containerPort: 5432 
+      env:
+        - name: POSTGRES_DB
+          value: bank
+        - name: POSTGRES_USER
+          value: postgres
+        - name: POSTGRES_PASSWORD
+          value: ragingbull
+        - name: PGDATA
+          value: /var/lib/postgresql/data/pgdata
+      volumeMounts: 
+        - mountPath: /var/lib/postgresql/data
+          name: db-data
+  volumes: 
+    - name: db-data #I'm attaching the volume in the container, labelled as "db-data" to an external volume 
+      persistentVolumeClaim:
+        claimName: pancake-pvc 
+
+

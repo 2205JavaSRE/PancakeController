@@ -1,0 +1,15 @@
+apiVersion: v1
+kind: Service
+metadata:
+  name: pancake-service
+  namespace: pancake-controller-space
+  labels:
+    app: pancake-bank-app
+spec:
+  selector:
+    app: pancake-bank-app
+  ports:
+  - port: 80
+    targetPort: 7070
+    protocol: TCP
+    name: http

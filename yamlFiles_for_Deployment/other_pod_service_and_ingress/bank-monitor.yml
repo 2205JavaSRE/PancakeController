@@ -1,0 +1,20 @@
+apiVersion: monitoring.coreos.com/v1
+kind: ServiceMonitor
+metadata:
+  name: pancake-controller-bank-monitor
+  namespace: pancake-controller-space
+  labels:
+    app: pancake-bank-app
+    prometheus: devops #This key: value pair has to exist! Otherwise prometheus will not recognize this service monitor
+spec:
+  endpoints:
+  - port: http
+    interval: 15s
+    path: /metrics #Where your metrics will be
+  namespaceSelector:
+    matchNames:
+    - pancake-controller-space
+  selector:
+    matchLabels:
+      app: pancake-bank-app
+
