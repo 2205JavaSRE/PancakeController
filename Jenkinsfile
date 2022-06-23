@@ -33,7 +33,7 @@ pipeline {
 				script{
 					sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
                     sh 'chmod u+x ./kubectl'
-					sh './kubectl delete -f yamlFiles_for_Deployment/canary.yml -n pancake-controller-space'
+					//sh './kubectl delete -f yamlFiles_for_Deployment/canary.yml -n pancake-controller-space'
                     sh './kubectl apply -f yamlFiles_for_Deployment/canary.yml -n pancake-controller-space'
 				}
 			}
