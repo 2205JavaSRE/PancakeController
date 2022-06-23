@@ -37,7 +37,7 @@ public class RequestServiceImpl implements RequestService {
 	public void getAcct(Context ctx){                          //gets account info
 			
 					String user = ctx.formParam("username");
-					String check = ctx.cachedSessionAttribute("username");
+					String check = ctx.sessionAttribute("username");
 					
 					if(user.equalsIgnoreCase(check)) {
 			
