@@ -16,12 +16,12 @@ public class AuthenticationServiceImpl implements AuthenticationService{
 		prom.counter();	//updates prometheus for login attempts
 		AuthenticationDAO authDao = new AuthenticationDAO();
 		String username = ctx.formParam("username");
-		System.out.println("DEBUG FORM PARAM USERNAME: " + username);
+		//System.out.println("DEBUG FORM PARAM USERNAME: " + username);
 		String password = ctx.formParam("password");
 		
 			if(true/*authDao.authenticateUser(username, password)*/) {
 				ctx.sessionAttribute("username", username);
-				System.out.println(ctx.sessionAttribute("username").toString());
+				//System.out.println(ctx.sessionAttribute("username").toString());
 				ctx.sessionAttribute("password", password);
 				
 				ctx.status(201);

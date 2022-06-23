@@ -39,8 +39,8 @@ public class RequestServiceImpl implements RequestService {
 					String user = ctx.formParam("username");
 					String check = ctx.sessionAttribute("username");
 					
-					System.out.println("DEBUG OUTPUT variable user: " + user);
-					System.out.println("DEBUG OUTPUT variable check: " + check);
+//					System.out.println("DEBUG OUTPUT variable user: " + user);
+//					System.out.println("DEBUG OUTPUT variable check: " + check);
 					
 					if(user.equalsIgnoreCase(check)) {
 			
