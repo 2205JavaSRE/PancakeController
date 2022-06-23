@@ -100,7 +100,7 @@ public class RequestMapping {
 			//endpoint for logging out
 			app.post("/logout", ctx -> {
 				
-				ctx.consumeSessionAttribute("username");
+				ctx.clearCookieStore();
 				ctx.status(200);
 			});
 			
