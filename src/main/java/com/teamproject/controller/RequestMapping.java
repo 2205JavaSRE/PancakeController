@@ -26,14 +26,14 @@ public class RequestMapping {
 	
 			//-----------------------------------------------------------------------------------------------
 			//testing for authorization
-			app.before("/customer/*", ctx -> {  
-				
-				if(!authDao.check()) {
-				ctx.status(403);
-				}
-				
-				});
-			
+//			app.before("/customer/*", ctx -> {  
+//				
+//				if(!authDao.check()) {
+//				ctx.status(403);
+//				}
+//				
+//				});
+//			
 			app.before("/admin/*", ctx -> {  
 				
 				if(!authDao.check()) {
