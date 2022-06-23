@@ -12,8 +12,8 @@ public class RequestMapping {
 
 	public static void configureRoutes(Javalin app) {
 		
-			app.get("/", ctx ->{
-				ctx.result("Bank Root Endpoint");
+			app.get("/test", ctx ->{
+				ctx.result("Bank Test Endpoint");
 			});
 		
 			//login	-----------------------------------------------------------------------------------------
