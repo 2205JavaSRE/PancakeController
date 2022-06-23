@@ -1,0 +1,19 @@
+kind: Deployment
+metadata:
+  name: pancake-controller-bank-app-canary
+  namespace: pancake-controller-space
+  labels:
+    app: pancake-bank-app-canary
+spec:
+  replicas: 3
+  template:
+    metadata:
+      labels:
+        app: pancake-bank-app
+    spec:
+      containers:
+      - name: pancake-bank-deployment
+        image: revnkog/project2:canary
+        ports:
+        - containerPort: 7070
+        imagePullPolicy: Always
