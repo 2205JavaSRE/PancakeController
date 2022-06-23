@@ -20,9 +20,9 @@ public class AuthenticationServiceImpl implements AuthenticationService{
 		String password = ctx.formParam("password");
 		
 			if(true/*authDao.authenticateUser(username, password)*/) {
-				ctx.sessionAttribute("username", username);
+				//ctx.sessionAttribute("username", username);
 				//System.out.println(ctx.sessionAttribute("username").toString());
-				ctx.sessionAttribute("password", password);
+				//ctx.sessionAttribute("password", password);
 				
 				ctx.status(201);
 				ctx.result("Welcome to the Pancake Bank!");
