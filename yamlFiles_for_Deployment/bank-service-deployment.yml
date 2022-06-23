@@ -29,7 +29,7 @@ spec:
         imagePullPolicy: Always
         env:
           - name: db_url
-            value: jdbc:postgresql://pancake-postgres-service:5432/postgres
+            value: jdbc:postgresql://pancake-postgres-service:5432/bank
           - name: db_user
             value: postgres
           - name: db_pass

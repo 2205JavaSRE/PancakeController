@@ -23,6 +23,7 @@ public class AuthenticationServiceImpl implements AuthenticationService{
 				ctx.sessionAttribute("password", password);
 				
 				ctx.status(201);
+				ctx.result("Welcome to the Pancake Bank!");
 				} else {
 					ctx.status(403);
 				}

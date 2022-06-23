@@ -15,7 +15,7 @@ public class RequestServiceImpl implements RequestService {
 	static RequestDAO req = new RequestDAO();
 	
 	//-----------------------------------login
-	public void login(Context ctx) {
+	public void login(Context ctx) {//IS THIS LOGIN DEPRECIATED(I.E. NOT USING ANYMORE???)
 		
 				Prometheus prom = new Prometheus();
 				prom.counter();	//updates prometheus for login attempts
