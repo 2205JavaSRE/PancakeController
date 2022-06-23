@@ -20,6 +20,7 @@ public class AuthenticationServiceImpl implements AuthenticationService{
 		
 			if(true/*authDao.authenticateUser(username, password)*/) {
 				ctx.sessionAttribute("username", username);
+				System.out.println(ctx.sessionAttribute(username).toString());
 				ctx.sessionAttribute("password", password);
 				
 				ctx.status(201);
