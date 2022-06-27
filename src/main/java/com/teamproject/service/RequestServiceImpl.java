@@ -3,8 +3,6 @@ package com.teamproject.service;
 import java.sql.SQLException;
 import com.teamproject.dao.AuthenticationDAO;
 import com.teamproject.dao.RequestDAO;
-import com.teamproject.util.Prometheus;
-
 import io.javalin.http.Context;
 import io.micrometer.prometheus.PrometheusConfig;
 import io.micrometer.prometheus.PrometheusMeterRegistry;
@@ -13,21 +11,18 @@ public class RequestServiceImpl implements RequestService {
 	
 	static PrometheusMeterRegistry registry = new PrometheusMeterRegistry(PrometheusConfig.DEFAULT);
 	static RequestDAO req = new RequestDAO();
+	static AuthenticationDAO authDao = new AuthenticationDAO();
 	
 	public void getAcct(Context ctx){                          //gets account info
 			
 					String user = ctx.formParam("username");
-					String check = ctx.cookieStore("username");
+					String username = JWTServiceImpl.getUsername(authDao.getToken());
 					
-//					System.out.println("DEBUG OUTPUT variable user: " + user);
-//					System.out.println("DEBUG OUTPUT variable check: " + check);
 					
-					if(user.equalsIgnoreCase(check)) {
-			
-						 
+					if(username.equalsIgnoreCase(user)) {
 						 
 						 try {
-							req.getAccount(ctx, check);
+							req.getAccount(ctx, username);
 							ctx.status(200);
 						} catch (SQLException e) {
 							e.printStackTrace();
@@ -37,32 +32,32 @@ public class RequestServiceImpl implements RequestService {
 		}
 	
 	public void custDeposit(Context ctx) {       //for deposits
-			
-					String user = ctx.formParam("username");
-					String check = ctx.cookieStore("username"); 
 					
-					if(user.equalsIgnoreCase(check)) {
+					String user = ctx.formParam("username");
+					String username = JWTServiceImpl.getUsername(authDao.getToken()); 
+					
+					if(username.equalsIgnoreCase(user)) {
 			
 						 RequestDAO req = new RequestDAO();
 						 
 						 try {
-							req.deposit(ctx, check);
+							req.deposit(ctx, username);
 							ctx.status(200);
 						} catch (SQLException e) {
 							e.printStackTrace();
 						}
-						 
+				
 					}
 		}
 	
 	public void custWithdraw(Context ctx) {  //for withdrawals
-			
-					String user = ctx.formParam("username");
-					String check = ctx.cookieStore("username");
 					
-					if(user.equalsIgnoreCase(check)) {
+					String user = ctx.formParam("username");
+					String username = JWTServiceImpl.getUsername(authDao.getToken());
+					
+					if(username.equalsIgnoreCase(user)) {
 						 
-						 req.withdraw(ctx, check);
+						 req.withdraw(ctx, username);
 						ctx.status(200);
 						 
 					}
@@ -73,12 +68,12 @@ public class RequestServiceImpl implements RequestService {
 	public void custTransfer(Context ctx) throws SQLException {  //for transfering between accounts (based on account number)
 			
 					String user = ctx.formParam("username");
-					String check = ctx.cookieStore("username");
+					String username = JWTServiceImpl.getUsername(authDao.getToken());
 					int acctNum = Integer.parseInt(ctx.formParam("acctnum"));
 					
-					if(user.equalsIgnoreCase(check)) {
+					if(username.equalsIgnoreCase(user)) {
 			
-						 req.transfer(ctx, check, acctNum);
+						req.transfer(ctx, username, acctNum);
 						ctx.status(200);
 						 
 					}
