@@ -1,18 +1,7 @@
-sudo yum update -y
-sudo amazon-linux-extras enable corretto8
-sudo yum install java-1.8.0-amazon-corretto
-sudo yum install java-1.8.0-amazon-corretto-devel
-java -version
-sudo yum update -y
-sudo yum install git -y
-git version
-mkdir mygit
-cd mygit/
-git init
-cd ~
-sudo yum update -y
-sudo wget -O /etc/yum.repos.d/jenkins.repo \
-    https://pkg.jenkins.io/redhat-stable/jenkins.repo
-sudo rpm --import https://pkg.jenkins.io/redhat-stable/jenkins.io.key
-sudo amazon-linux-extras install java-openjdk11 -y
-sudo yum install jenkins -y
+#!/bin/bash
+wget -q -O - https://pkg.jenkins.io/debian-stable/jenkins.io.key | sudo apt-key add -
+sudo sh -c 'echo deb http://pkg.jenkins.io/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
+sudo apt update && sudo apt upgrade -y
+sudo apt install default-jre -y
+sudo apt install jenkins -y
+sudo systemctl start jenkins
