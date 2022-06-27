@@ -59,7 +59,7 @@ public class Prometheus {
 		
 			
 		
-	 registry.config().commonTags("app","monitored-app");
+	 registry.config().commonTags("app","pancake-monitored-app");
 	 
 	 
 	 
