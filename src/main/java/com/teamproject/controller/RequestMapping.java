@@ -26,13 +26,7 @@ public class RequestMapping {
 	
 			//-----------------------------------------------------------------------------------------------
 			//testing for authorization / verifying the JWTs before each request
-			app.before("/customer/*", ctx -> {  
-				
-				if(!JWTServiceImpl.verifyJWT(authDao.getToken())) {
-				ctx.status(403);
-				}
-				
-				});
+	
 			
 			app.before("/admin/*", ctx -> {
 				
