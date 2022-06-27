@@ -4,7 +4,6 @@ import com.auth0.jwt.JWT;
 import com.auth0.jwt.algorithms.Algorithm;
 import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
-import com.teamproject.dao.AuthenticationDAO;
 
 public class JWTServiceImpl implements JWTService{
 	
@@ -47,11 +46,9 @@ public static final String KEY = "8G56A5DF15A87CE";
 	}
 	
     //verifies the JWT token
-    public static boolean verifyJWT() {
+    public static boolean verifyJWT(String token) {
     	
 	    try {
-	    	AuthenticationDAO authDao = new AuthenticationDAO();
-	    	String token = authDao.getToken();
 	        JWT.require(Algorithm.HMAC256(KEY)).build().verify(token);
 	        return true;
 	    } catch (JWTVerificationException exception) {
