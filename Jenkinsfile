@@ -61,9 +61,9 @@ pipeline {
 				    sh 'curl -LO "https://storage.googleapis.com/kubernetes-release/release/v1.20.5/bin/linux/amd64/kubectl"'  
                     sh 'chmod u+x ./kubectl'
 					sh 'echo $registry'
-					sh './kubectl set image -n pancake-controller-space deployment/pancake-controller-bank-app pancake-bank-deployment=$registry:latest'
 					sh './kubectl delete -f yamlFiles_for_Deployment/bank-service-deployment.yml -n pancake-controller-space'
                     sh './kubectl apply -f yamlFiles_for_Deployment/bank-service-deployment.yml -n pancake-controller-space'
+					sh './kubectl set image -n pancake-controller-space deployment/pancake-controller-bank-app pancake-bank-deployment=$registry:latest'
 				}
 			}
 		}
