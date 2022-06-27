@@ -4,28 +4,16 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+
 import com.teamproject.util.ConnectionFactory;
-import com.teamproject.service.JWTServiceImpl;
 
 public class AuthenticationDAO {
 
 	public AuthenticationDAO(){
 		super();
 	}
-	
-	private static String token;
-	
-	public void setToken(String token) {
-		
-		this.token = token;
-	}
-	
-	public String getToken() {
-		String token = this.token;
-		return token;
-	}
-	
-	public JWTServiceImpl jwt = new JWTServiceImpl();	
+
+	public static boolean f = false;	
 	public boolean authenticateUser(String username, String password) {
 		try {
 		Connection conn = ConnectionFactory.connectUser();
@@ -38,13 +26,12 @@ public class AuthenticationDAO {
 				
 				while(rs.next()) {
 					if (!rs.wasNull()) {
-						if (rs.getBoolean("ismanager")) {//table contains employees and managers	
-								this.setToken(jwt.createJWT(username, "manager"));
+						if (rs.getBoolean("ismanager")) {//table contains employees and managers
+								f = true; // allows admin access
 								return true;
 								}
-							this.setToken(jwt.createJWT(username, "employee"));
-							return true;
-						} 
+						return true;
+					}
 					
 					
 			}
@@ -53,27 +40,14 @@ public class AuthenticationDAO {
 			e.printStackTrace();
 		}
 		
-	
+		
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
-		
 		return false;
-	}
-
-	public boolean verify() {
-		
-		String role = "manager";
-		String token = JWTServiceImpl.getRole(this.getToken());
-		if (!token.equalsIgnoreCase(role)) {
-		return false;
-		} else {
-		return true;
-		}
-		
-		
 	}
 	
+public boolean check() {
+	return f;
+	}
 }
-	
-

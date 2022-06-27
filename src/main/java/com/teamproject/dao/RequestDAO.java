@@ -6,8 +6,10 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Random;
+
 import com.teamproject.models.CustomerRequest;
 import com.teamproject.util.ConnectionFactory;
+
 import io.javalin.http.Context;
 
 
@@ -200,7 +202,7 @@ public class RequestDAO  {
 		
 	}
 	
-	public void closeAccount(Context ctx, String username) throws SQLException { //admin privilege required
+	public void closeAccount(Context ctx, String username) throws SQLException { //admin priviledge required
 		
 		
 		String sql = "DELETE FROM accounts WHERE username= ?";

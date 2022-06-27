@@ -1,10 +1,7 @@
 package com.teamproject.controller;
-import com.auth0.jwt.JWT;
 import com.teamproject.dao.AuthenticationDAO;
-import com.teamproject.service.JWTServiceImpl;
 
 import io.javalin.Javalin;
-import io.javalin.http.HttpCode;
 
 public class RequestMapping {
 
@@ -15,7 +12,10 @@ public class RequestMapping {
 
 	public static void configureRoutes(Javalin app) {
 		
-
+			app.get("/test", ctx ->{
+				ctx.result("Bank Test Endpoint");
+			});
+		
 			//login	-----------------------------------------------------------------------------------------
 			app.post("/login", ctx -> {	
 						
@@ -25,23 +25,22 @@ public class RequestMapping {
 			
 	
 			//-----------------------------------------------------------------------------------------------
-			//testing for authorization / verifying the JWTs before each request
+			//testing for authorization
 			app.before("/customer/*", ctx -> {  
 				
-				if(!JWTServiceImpl.verifyJWT(authDao.getToken())) {
+				if(!authDao.check()) {
 				ctx.status(403);
 				}
 				
 				});
 			
-			app.before("/admin/*", ctx -> {
+			app.before("/admin/*", ctx -> {  
 				
-				if(!authDao.verify()) {  //checks JWT for "manager" role
-					ctx.status(403);
-					ctx.redirect("/login");
+				if(!authDao.check()) {
+				ctx.status(403);
 				}
 				
-			});
+				});
 				
 			
 			//customer endpoints
@@ -81,22 +80,19 @@ public class RequestMapping {
 			
 			app.get("/admin/viewaccounts", ctx ->{
 				
-				
 				req.getAllAccts(ctx);
 				
 			});
 			
 			app.post("/admin/closeaccount", ctx -> {
 				
-			
 				req.closeAcct(ctx);
 				
 			});
 			
 			app.get("/admin/history", ctx -> {
-			
 				
-					req.history(ctx);
+				req.history(ctx);
 			});
 			
 			
@@ -104,14 +100,8 @@ public class RequestMapping {
 			//endpoint for logging out
 			app.post("/logout", ctx -> {
 				
-				authDao.setToken(null); //token active until /logout
-				if (authDao.getToken()==null) {  //double check
-				ctx.result("you have been logged out");
+				ctx.clearCookieStore();
 				ctx.status(200);
-				} else  {
-					ctx.status(500);
-					}
-				
 			});
 			
 			

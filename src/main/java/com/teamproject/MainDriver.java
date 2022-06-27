@@ -2,8 +2,15 @@ package com.teamproject;
 
 import io.javalin.Javalin;
 import io.javalin.plugin.metrics.MicrometerPlugin;
+import io.micrometer.prometheus.PrometheusMeterRegistry;
+
+import com.teamproject.util.*;
+import com.teamproject.util.MicrometerMonitor;
 import com.teamproject.controller.RequestMapping;
 import com.teamproject.util.Prometheus;
+import com.teamproject.controller.*;
+
+
 
 
 public class MainDriver {
@@ -11,23 +18,30 @@ public class MainDriver {
 
 	public static void main(String...args) { 
 
-		
+		Prometheus.monitoring();
 		
 		Javalin app = Javalin.create( config -> {
 			config.registerPlugin(new MicrometerPlugin(Prometheus.registry));
 				}
 				).start(7070);
 		
-		 
+		 MicrometerMonitor.MoniteringPaths(app, Prometheus.registry);
 
 		 RequestMapping.configureRoutes(app);
-		 
-		 
-		 Prometheus.monitoring();
-		 Prometheus.monitoringPath(app, Prometheus.registry);
 	
 		
 		 
 		 
+		
+//using different class		 
+//			
+//		 app.get("/prometheus", ctx -> {
+//				 
+//				 ctx.result(Prometheus.registry.scrape());
+//			 });
+//	}
+//	
+	 
+
 	}
 }
