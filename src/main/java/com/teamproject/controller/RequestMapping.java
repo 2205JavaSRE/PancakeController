@@ -4,7 +4,6 @@ import com.teamproject.dao.AuthenticationDAO;
 import com.teamproject.service.JWTServiceImpl;
 
 import io.javalin.Javalin;
-import io.javalin.http.Context;
 import io.javalin.http.HttpCode;
 
 public class RequestMapping {
@@ -35,7 +34,7 @@ public class RequestMapping {
 					ctx.status(403);
 					ctx.redirect("/login");
 				}
-			
+				
 			});
 				
 			
@@ -100,7 +99,6 @@ public class RequestMapping {
 			app.post("/logout", ctx -> {
 				
 				authDao.setToken(null); //token active until /logout
-				ctx.clearCookieStore();
 				if (authDao.getToken()==null) {  //double check
 				ctx.result("you have been logged out");
 				ctx.status(200);

@@ -18,7 +18,7 @@ public class AuthenticationServiceImpl implements AuthenticationService{
 		
 			
 			if (authDao.authenticateUser(username, password)) {
-				String user = JWTServiceImpl.getUsername(ctx.cookieStore("user"));
+				String user = JWTServiceImpl.getUsername(authDao.getToken());
 				ctx.status(201);
 				ctx.result(user+", welcome to the Pancake Bank!");
 				} else {ctx.status(403);}

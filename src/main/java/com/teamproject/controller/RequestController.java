@@ -1,8 +1,6 @@
 package com.teamproject.controller;
 
 import java.sql.SQLException;
-
-import com.teamproject.dao.AuthenticationDAO;
 import com.teamproject.service.AuthenticationServiceImpl;
 import com.teamproject.service.RequestServiceImpl;
 import io.javalin.http.Context;
@@ -11,8 +9,7 @@ public class RequestController {
 
 	public RequestServiceImpl req = new RequestServiceImpl();
 	public AuthenticationServiceImpl auth = new AuthenticationServiceImpl();
-	public AuthenticationDAO authDao = new AuthenticationDAO(); //only DAO dependency is for setting JWT / cookie
-
+	
 	public RequestController() {
 		super();
 	}
@@ -22,7 +19,6 @@ public class RequestController {
 	public void login(Context ctx) {
 		
 		auth.login(ctx);
-		ctx.cookie("user", authDao.getToken()); //sets the cookie
 		
 	}
 

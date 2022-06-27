@@ -15,18 +15,18 @@ public class RequestServiceImpl implements RequestService {
 	
 	public void getAcct(Context ctx){                          //gets account info
 			
+					String user = ctx.formParam("username");
+					String username = JWTServiceImpl.getUsername(authDao.getToken());
 					
-					String username = JWTServiceImpl.getUsername(ctx.cookieStore("user"));
-					System.out.println(username);
 					
-					
+					if(username.equalsIgnoreCase(user)) {
 						 
 						 try {
 							req.getAccount(ctx, username);
 							ctx.status(200);
 						} catch (SQLException e) {
 							e.printStackTrace();
-						
+						}
 						 
 					}
 		}
@@ -34,7 +34,7 @@ public class RequestServiceImpl implements RequestService {
 	public void custDeposit(Context ctx) {       //for deposits
 					
 					String user = ctx.formParam("username");
-					String username = JWTServiceImpl.getUsername(ctx.cookieStore("user")); 
+					String username = JWTServiceImpl.getUsername(authDao.getToken()); 
 					
 					if(username.equalsIgnoreCase(user)) {
 			
@@ -53,7 +53,7 @@ public class RequestServiceImpl implements RequestService {
 	public void custWithdraw(Context ctx) {  //for withdrawals
 					
 					String user = ctx.formParam("username");
-					String username = JWTServiceImpl.getUsername(ctx.cookieStore("user"));
+					String username = JWTServiceImpl.getUsername(authDao.getToken());
 					
 					if(username.equalsIgnoreCase(user)) {
 						 
@@ -68,7 +68,7 @@ public class RequestServiceImpl implements RequestService {
 	public void custTransfer(Context ctx) throws SQLException {  //for transfering between accounts (based on account number)
 			
 					String user = ctx.formParam("username");
-					String username = JWTServiceImpl.getUsername(ctx.cookieStore("user"));
+					String username = JWTServiceImpl.getUsername(authDao.getToken());
 					int acctNum = Integer.parseInt(ctx.formParam("acctnum"));
 					
 					if(username.equalsIgnoreCase(user)) {

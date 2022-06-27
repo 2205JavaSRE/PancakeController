@@ -4,31 +4,25 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import io.javalin.*;
-import io.javalin.http.Context;
-
 import com.teamproject.util.ConnectionFactory;
 import com.teamproject.service.JWTServiceImpl;
 
 public class AuthenticationDAO {
-	static Context ctx;
-	
-	public AuthenticationDAO() {
+
+	public AuthenticationDAO(){
 		super();
 	}
 	
 	private static String token;
-
 	
 	public void setToken(String token) {
 		
 		this.token = token;
-		
 	}
-
+	
 	public String getToken() {
-		
-		return this.token;
+		String token = this.token;
+		return token;
 	}
 	
 	public JWTServiceImpl jwt = new JWTServiceImpl();	
@@ -41,18 +35,14 @@ public class AuthenticationDAO {
 				ps.setString(1, username);
 				ps.setString(2, password);
 				ResultSet rs = ps.executeQuery();
-				String token;
+				
 				while(rs.next()) {
 					if (!rs.wasNull()) {
 						if (rs.getBoolean("ismanager")) {//table contains employees and managers	
-								token = jwt.createJWT(username, "manager");
-								this.setToken(token);
-								
+								this.setToken(jwt.createJWT(username, "manager"));
 								return true;
 								}
-						token = jwt.createJWT(username, "employee");
-						this.setToken(token);
-						
+							this.setToken(jwt.createJWT(username, "employee"));
 							return true;
 						} 
 					

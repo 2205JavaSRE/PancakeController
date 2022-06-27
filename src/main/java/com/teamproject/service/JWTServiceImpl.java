@@ -6,9 +6,6 @@ import com.auth0.jwt.exceptions.JWTVerificationException;
 import com.auth0.jwt.interfaces.DecodedJWT;
 import com.teamproject.dao.AuthenticationDAO;
 
-import io.javalin.http.Context;
-import io.javalin.http.Handler;
-
 public class JWTServiceImpl implements JWTService{
 	
 	public JWTServiceImpl(){
@@ -17,7 +14,6 @@ public class JWTServiceImpl implements JWTService{
     
 
 public static final String KEY = "8G56A5DF15A87CE";
-static AuthenticationDAO authDao = new AuthenticationDAO();
 
 //creates a JWT token
 	public String createJWT(String username, String role) {
@@ -25,15 +21,16 @@ static AuthenticationDAO authDao = new AuthenticationDAO();
 			return JWT.create()
 					  .withSubject(username)
 					  .withClaim("role", role)
-					  .sign(Algorithm.HMAC256(KEY));	
+					  .sign(Algorithm.HMAC256(KEY));
+		
 	     
 	}
 
 
 //extracts the username from the JWT token
 	public static String getUsername(String token) {
-		
-			DecodedJWT jwt = JWT.decode(authDao.getToken());
+	    
+			DecodedJWT jwt = JWT.decode(token);
 			String user = jwt.getSubject();
 			return user;
 		
@@ -42,7 +39,7 @@ static AuthenticationDAO authDao = new AuthenticationDAO();
 //extracts the role from the JWT token
 	public static String getRole(String token) {
 	   
-			DecodedJWT jwt = JWT.decode(authDao.getToken());
+			DecodedJWT jwt = JWT.decode(token);
 			String role = jwt.getClaim("role").asString();
 			return role;
 	    
@@ -50,15 +47,15 @@ static AuthenticationDAO authDao = new AuthenticationDAO();
 	}
 	
     //verifies the JWT token
-    public static boolean verifyJWT(String token) {
+    public static boolean verifyJWT() {
     	
 	    try {
+	    	AuthenticationDAO authDao = new AuthenticationDAO();
+	    	String token = authDao.getToken();
 	        JWT.require(Algorithm.HMAC256(KEY)).build().verify(token);
 	        return true;
 	    } catch (JWTVerificationException exception) {
 	        return false;
 	    }
 	}
-    
-    
 }
