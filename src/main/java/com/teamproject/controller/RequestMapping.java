@@ -12,10 +12,7 @@ public class RequestMapping {
 
 	public static void configureRoutes(Javalin app) {
 		
-			app.get("/test", ctx ->{
-				ctx.result("Bank Test Endpoint");
-			});
-		
+
 			//login	-----------------------------------------------------------------------------------------
 			app.post("/login", ctx -> {	
 						
@@ -64,14 +61,14 @@ public class RequestMapping {
 			
 			app.post("/customer/transfer", ctx ->{ //transfer to another account
 				
-				req.custTransfer(ctx);
+					req.custTransfer(ctx);
 			});
 			
 			//guest endpoint for new account
 			//----------------------------------------------------------------------------------------------
 			app.post("/guest/newaccount", ctx ->{ //create a new account
 				
-				req.newAcct(ctx);
+					req.newAcct(ctx);
 				
 			});
 			
@@ -80,19 +77,19 @@ public class RequestMapping {
 			
 			app.get("/admin/viewaccounts", ctx ->{
 				
-				req.getAllAccts(ctx);
+					req.getAllAccts(ctx);
 				
 			});
 			
 			app.post("/admin/closeaccount", ctx -> {
 				
-				req.closeAcct(ctx);
+					req.closeAcct(ctx);
 				
 			});
 			
 			app.get("/admin/history", ctx -> {
 				
-				req.history(ctx);
+					req.history(ctx);
 			});
 			
 			
@@ -100,8 +97,8 @@ public class RequestMapping {
 			//endpoint for logging out
 			app.post("/logout", ctx -> {
 				
-				ctx.clearCookieStore();
-				ctx.status(200);
+					ctx.clearCookieStore();
+					ctx.status(200);
 			});
 			
 			

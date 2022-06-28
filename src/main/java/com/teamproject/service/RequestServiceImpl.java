@@ -1,10 +1,7 @@
 package com.teamproject.service;
 
 import java.sql.SQLException;
-import com.teamproject.dao.AuthenticationDAO;
 import com.teamproject.dao.RequestDAO;
-import com.teamproject.util.Prometheus;
-
 import io.javalin.http.Context;
 import io.micrometer.prometheus.PrometheusConfig;
 import io.micrometer.prometheus.PrometheusMeterRegistry;
@@ -16,11 +13,9 @@ public class RequestServiceImpl implements RequestService {
 	
 	public void getAcct(Context ctx){                          //gets account info
 			
-					String user = ctx.formParam("username");
+					String user = ctx.formParam("username"); //requires form parameter: username
 					String check = ctx.cookieStore("username");
 					
-//					System.out.println("DEBUG OUTPUT variable user: " + user);
-//					System.out.println("DEBUG OUTPUT variable check: " + check);
 					
 					if(user.equalsIgnoreCase(check)) {
 			
@@ -38,7 +33,7 @@ public class RequestServiceImpl implements RequestService {
 	
 	public void custDeposit(Context ctx) {       //for deposits
 			
-					String user = ctx.formParam("username");
+					String user = ctx.formParam("username"); //requires form parameters: username, deposit
 					String check = ctx.cookieStore("username"); 
 					
 					if(user.equalsIgnoreCase(check)) {
@@ -57,7 +52,7 @@ public class RequestServiceImpl implements RequestService {
 	
 	public void custWithdraw(Context ctx) {  //for withdrawals
 			
-					String user = ctx.formParam("username");
+					String user = ctx.formParam("username"); //requires form parameters: username, withdraw
 					String check = ctx.cookieStore("username");
 					
 					if(user.equalsIgnoreCase(check)) {
@@ -72,7 +67,7 @@ public class RequestServiceImpl implements RequestService {
 	
 	public void custTransfer(Context ctx) throws SQLException {  //for transfering between accounts (based on account number)
 			
-					String user = ctx.formParam("username");
+					String user = ctx.formParam("username"); //requires form parameters: username, amount, acctnum
 					String check = ctx.cookieStore("username");
 					int acctNum = Integer.parseInt(ctx.formParam("acctnum"));
 					
@@ -86,7 +81,7 @@ public class RequestServiceImpl implements RequestService {
 		}
 	
 	//--------------------------------------------------------------- for creating new accounts
-		public void newAcct(Context ctx) throws SQLException {
+		public void newAcct(Context ctx) throws SQLException {  //requires form parameters: username, password, and balance (for creating account with a balance)
 					String user = ctx.formParam("username");
 					String pass = ctx.formParam("password");
 					double balance = Double.parseDouble(ctx.formParam("balance"));
@@ -108,7 +103,7 @@ public class RequestServiceImpl implements RequestService {
 		public void closeAcct(Context ctx) throws SQLException { 
 			
 
-					String user = ctx.formParam("user");
+					String user = ctx.formParam("user"); //requires form parameter: user
 					req.closeAccount(ctx, user);
 					ctx.status(200);
 			

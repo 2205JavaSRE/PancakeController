@@ -1,14 +1,8 @@
 package com.teamproject.util;
 
 import java.io.File;
-import java.util.concurrent.TimeUnit;
-
-import com.teamproject.controller.RequestMapping;
-
 import io.javalin.Javalin;
-import io.javalin.plugin.metrics.MicrometerPlugin;
 import io.micrometer.core.instrument.Counter;
-import io.micrometer.core.instrument.Timer;
 import io.micrometer.core.instrument.binder.jvm.ClassLoaderMetrics;
 import io.micrometer.core.instrument.binder.jvm.JvmGcMetrics;
 import io.micrometer.core.instrument.binder.jvm.JvmMemoryMetrics;
@@ -33,26 +27,11 @@ public class Prometheus {
 			.tag("purpose", "tracking").register(registry);
 	
 	
-//	static Timer loginLatencyTimer = registry.timer("LatencyTimer");
 	
 	public static double counter() {
 			counter.increment(1);
 			return counter.count();
 	}
-	
-//	public static void measureLatency() {
-//		loginLatencyTimer.record(() ->{
-//			try {
-//				TimeUnit.MILLISECONDS.sleep(40);
-//			}
-//			catch (InterruptedException e) {
-//				e.printStackTrace();
-//			}
-//		});
-//		
-//		loginLatencyTimer.record(30, TimeUnit.MILLISECONDS);
-//		
-//	}
 	
 	
 	public static void monitoring() {
@@ -72,8 +51,19 @@ public class Prometheus {
 	 new ProcessorMetrics().bindTo(registry);
 	 new DiskSpaceMetrics(new File(System.getProperty("user.dir"))).bindTo(registry);
 	 
+		
 
 
 	}
+	
+	public static void monitoringPaths(Javalin app, PrometheusMeterRegistry registry) {
+
+		app.get("/metrics", ctx ->{
+			ctx.result(registry.scrape());
+		});
+		
+		
+	}
+ 
 
 }

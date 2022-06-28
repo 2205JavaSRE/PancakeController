@@ -6,14 +6,14 @@ import com.teamproject.util.Prometheus;
 import io.javalin.http.Context;
 
 public class AuthenticationServiceImpl implements AuthenticationService{
-	public static Prometheus prom = new Prometheus();
+
 	public AuthenticationServiceImpl() {
 		super();
 	}
 	
 	public void login(Context ctx) {
 		
-		prom.counter();	//updates prometheus for login attempts
+		Prometheus.counter();	//updates prometheus for login attempts
 		AuthenticationDAO authDao = new AuthenticationDAO();
 		String username = ctx.formParam("username");
 		String password = ctx.formParam("password");
